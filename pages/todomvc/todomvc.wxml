@@ -1,0 +1,20 @@
+<!--pages/todomvc/todomvc.wxml-->
+<!-- 头部内容 -->
+<view class="title">
+	<image src="../../assets/plus.png" class="add" bindtap="addInfo"></image>
+	<input model:value='{{ text }}' class='ipt' placeholder="Anything here..." bindinput="getVal"> </input>
+</view>
+<!-- 列表 -->
+<view>
+	<view class="list" wx:for="{{list}}" wx:key="id">
+		<icon type="{{item.isChecked == 0? 'circle' : 'success'}}" class="choose" bindtap="changeChecked" data-info='{{item}}'></icon>
+		<text class="list-content {{item.isChecked == 0? '' : 'completed'}}">{{item.hobby}}</text>
+		<icon type="clear " class="del" size="20" bindtap="delinfo" data-delinfo="{{item.id}}"></icon>
+	</view>
+</view>
+<!-- 底部 -->
+<view class="bottom">
+	<text>Toggle all</text>
+	<text>2 items left</text>
+	<text>Clear completed</text>
+</view>

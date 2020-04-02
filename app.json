@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/todomvc/todomvc",
+    "pages/index/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "TODOS",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar":{
+    "list":[{
+      "pagePath":"pages/index/index",
+      "text":"首页",
+      "iconPath":"assets/logs.png",
+      "selectedIconPath":"assets/logs-active.png"
+    },{
+      "pagePath": "pages/todomvc/todomvc",
+      "text": "todo",
+      "iconPath": "assets/todos.png",
+      "selectedIconPath": "assets/todos-active.png"
+    }]
+  },
+  "sitemapLocation": "sitemap.json"
+}

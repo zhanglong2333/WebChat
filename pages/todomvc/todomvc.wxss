@@ -1,0 +1,62 @@
+/* pages/todomvc/todomvc.wxss */
+.title {
+  display: flex;
+  align-items: center;
+}
+
+page{
+  border-top: 1rpx solid #ccc;
+}
+.ipt {
+  /* box-sizing: border-box; */
+  border: 1rpx solid #ccc;
+  /* width: 400rpx; */
+  margin: 30rpx auto;
+  width: 80%;
+  padding-left: 80rpx;
+  height: 70rpx;
+  border-radius: 5rpx;
+  box-shadow: 0 0 5rpx #ccc;
+}
+
+.add {
+  height: 40rpx;
+  width: 40rpx;
+  position: absolute;
+  left: 50rpx;
+}
+.list{
+  margin:auto;
+  border:1px solid #ccc;
+  width: 90%;
+  padding: 0 30rpx;
+  box-sizing: border-box;
+  height: 70rpx;
+  box-shadow: 0 0 5rpx #ccc;
+  border-radius: 5rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: none;
+  /* justify-content: space-between; */
+}
+.choose{
+  padding-right: 20rpx;
+}
+.list-content{
+ flex: 1;
+}
+.list:last-child{
+  border-bottom: 1rpx solid #ccc;
+}
+.completed{
+  color: #999;
+  text-decoration: line-through;
+}
+/* 底部 */
+.bottom{
+  display: flex;
+  justify-content: space-between;
+  padding:0 30rpx;
+  color: #ccc;
+  font-size: 30rpx;
+}
