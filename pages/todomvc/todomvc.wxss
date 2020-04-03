@@ -4,9 +4,10 @@
   align-items: center;
 }
 
-page{
+page {
   border-top: 1rpx solid #ccc;
 }
+
 .ipt {
   /* box-sizing: border-box; */
   border: 1rpx solid #ccc;
@@ -25,9 +26,10 @@ page{
   position: absolute;
   left: 50rpx;
 }
-.list{
-  margin:auto;
-  border:1px solid #ccc;
+
+.list {
+  margin: auto;
+  border: 1px solid #ccc;
   width: 90%;
   padding: 0 30rpx;
   box-sizing: border-box;
@@ -39,24 +41,44 @@ page{
   border-bottom: none;
   /* justify-content: space-between; */
 }
-.choose{
+
+.choose {
   padding-right: 20rpx;
 }
-.list-content{
- flex: 1;
+
+.list-content {
+  flex: 1;
 }
-.list:last-child{
+
+.list:last-child {
   border-bottom: 1rpx solid #ccc;
 }
-.completed{
+
+.completed {
   color: #999;
   text-decoration: line-through;
 }
+
 /* 底部 */
-.bottom{
+.bottom {
   display: flex;
   justify-content: space-between;
-  padding:0 30rpx;
+  padding: 0 30rpx;
   color: #ccc;
+  font-size: 30rpx;
+}
+
+.welcome {
+  font-size: 60rpx;
+  margin: 150rpx auto 30rpx;
+}
+
+.welcome,
+.wel-content {
+  text-align: center;
+  color: #999;
+}
+
+.wel-content {
   font-size: 30rpx;
 }

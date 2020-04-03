@@ -2,19 +2,25 @@
 <!-- 头部内容 -->
 <view class="title">
 	<image src="../../assets/plus.png" class="add" bindtap="addInfo"></image>
-	<input model:value='{{ text }}' class='ipt' placeholder="Anything here..." bindinput="getVal"> </input>
+	<input model:value='{{ text }}' class='ipt' placeholder="Anything here..." bindinput="getVal" bindconfirm="enterVal"> </input>
 </view>
-<!-- 列表 -->
-<view>
-	<view class="list" wx:for="{{list}}" wx:key="id">
-		<icon type="{{item.isChecked == 0? 'circle' : 'success'}}" class="choose" bindtap="changeChecked" data-info='{{item}}'></icon>
-		<text class="list-content {{item.isChecked == 0? '' : 'completed'}}">{{item.hobby}}</text>
-		<icon type="clear " class="del" size="20" bindtap="delinfo" data-delinfo="{{item.id}}"></icon>
+<block wx:if="{{list.length>0}}">
+	<!-- 列表 -->
+	<view>
+		<view class="list" wx:for="{{list}}" wx:key="id" bindtap="changeStates" data-info="{{item}}">
+			<icon type="{{item.isChecked == 0? 'circle' : 'success'}}" class="choose"></icon>
+			<text class="list-content {{item.isChecked == 0? '' : 'completed'}}" >{{item.hobby}}</text>
+			<icon type="clear " class="del" size="20" catchtap="delinfo" data-delinfo="{{item.id}}"></icon>
+		</view>
 	</view>
-</view>
-<!-- 底部 -->
-<view class="bottom">
-	<text>Toggle all</text>
-	<text>2 items left</text>
-	<text>Clear completed</text>
-</view>
+	<!-- 底部 -->
+	<view class="bottom">
+		<text bindtap="chooseAll">Toggle all</text>
+		<text>{{detailsNum}} items left</text>
+		<text bindtap="clear">Clear completed</text>
+	</view>
+</block>
+<block wx:else>
+<view class="welcome">Congratulations!</view>
+<view class="wel-content">There's no more work left.</view>
+</block>

@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    text: '',
+    text: '', //input内容
+    detailsNum: 0,
     list: [{
       hobby: '学习',
       isChecked: 1,
@@ -27,10 +28,10 @@ Page({
     //对id进行处理
     let id;
     //判断是否为空值
-    if(text === ''){
+    if (text === '') {
       wx.showToast({
         title: '内容不能为空',
-        icon:'none',
+        icon: 'none',
         duration: 2000
       })
       return;
@@ -48,7 +49,8 @@ Page({
       }],
       text: ''
     })
-
+    this.updateNum();
+    this.setSto()
   },
   /**
    * 获取文本框内容
@@ -61,8 +63,18 @@ Page({
   /**
    * 改变状态
    */
-  changeChecked(e) {
-    const info = e.target.dataset.info;
+  changeStates(e) {
+    /**
+     * 踩坑指南：在其他方法中，我刚开始使用了event查看target中有我想要的值于是乎我就使用了target
+     * 但是在此方法中就报错，info是undefined，查看了半天发现踩了以下的坑
+     * event.target返回的是点击的元素节点
+     * event.currentTarget返回的是绑定事件的元素
+     * 详细内容请查看 https://blog.csdn.net/jingjingshizhu/article/details/80067566
+     */
+
+    // const info = e.target.dataset.info;
+    const info = e.currentTarget.dataset.info;
+
     info.isChecked = info.isChecked == 0 ? 1 : 0;
     this.data.list.forEach(item => {
       if (item.id == info.id) {
@@ -72,29 +84,113 @@ Page({
     this.setData({
       list: this.data.list
     })
+    this.updateNum()
+    this.setSto()
+
   },
   /**
    * 删除信息
    */
-  delinfo(e){
-    const infoid = e.target.dataset.delinfo;
-    this.data.list.forEach((item,index)=>{
-      if(infoid == item.id){
-        this.data.list.splice(index,1)
+  delinfo(e) {
+    const infoid = e.currentTarget.dataset.delinfo;
+    this.data.list.forEach((item, index) => {
+      if (infoid == item.id) {
+        this.data.list.splice(index, 1)
       }
     })
     this.setData({
-      list:this.data.list
-    })    
-    
+      list: this.data.list
+    })
+    this.updateNum()
+    this.setSto()
+
+  },
+  /**
+   * 全选
+   */
+
+  chooseAll() {
+    const {
+      list
+    } = this.data
+    /**
+     * every方法：所有项都是true 返回true
+     * 只要有一项为false，那么就返回false
+     */
+    const allChecked = list.every(item => item.isChecked);
+    list.forEach(item => {
+      item.isChecked = !allChecked
+    })
+    const a = list.forEach(item => item.hobby)
+
+    this.setData({
+      list
+    })
+    this.updateNum()
+    this.setSto()
+
+  },
+  /**
+   * 清除已选中的
+   */
+  clear() {
+    const {
+      list
+    } = this.data;
+    const incomplete = list.filter(item => item.isChecked == 0)
+    this.setData({
+      list: incomplete
+    })
+    this.setSto()
+
+  },
+  /**
+   * 更新数据数量
+   */
+  updateNum() {
+    const {
+      list
+    } = this.data;
+    let leftNum = 0;
+    list.forEach(item => {
+      if (item.isChecked == 0) {
+        leftNum++
+      }
+    })
+    this.setData({
+      detailsNum: leftNum
+    })
+  },
+  /**
+   * 存储数据
+   */
+  setSto(){
+    wx.setStorageSync('aa', this.data.list,)
+  },
+  /**
+   * 
+   */
+  getSto(){
+   let list = wx.getStorageSync('aa')
+   
+   this.setData({
+     list
+   })
   },
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function () {
 
   },
+  /**
+   * 回车增加
+   */
+  enterVal(e) {
+    this.addInfo()
 
+
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -106,6 +202,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    this.getSto()
+    this.updateNum()
 
   },
 
